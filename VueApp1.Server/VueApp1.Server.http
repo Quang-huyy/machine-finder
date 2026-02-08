@@ -1,0 +1,21 @@
+@Backend = http://localhost:5000
+@ContentType = application/json
+
+### Get all machines
+GET {{Backend}}/api/machines
+Accept: {{ContentType}}
+
+### Get machine params by ID
+GET {{Backend}}/api/machines/123/params
+Accept: {{ContentType}}
+
+### Submit feedback/suggestion
+POST {{Backend}}/api/feedback
+Content-Type: {{ContentType}}
+
+{
+  "machineId": "123",
+  "suggestion": "Add payment method"
+}
+
+###

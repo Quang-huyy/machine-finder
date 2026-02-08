@@ -1,0 +1,76 @@
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+*.rsuser
+*.userosscache
+*.sln
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+*_i.c
+*_p.c
+*.ilk
+*.exe
+*.dll
+*.exp
+*.pdb
+*.ipch
+
+# .NET
+.dotnet/
+.net/
+
+# Dependencies
+node_modules/
+package-lock.json
+NuGet.Config
+*.nupkg
+*.snupkg
+
+# Frontend build
+dist/
+dist-ssr/
+coverage/
+*.local
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+user-secrets.json
+secrets.json
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing
+Cypress/
+__screenshots__/
+cypress/videos/
+cypress/screenshots/
+
+# Misc
+.cache/
+.tmp/
+*.tmp
