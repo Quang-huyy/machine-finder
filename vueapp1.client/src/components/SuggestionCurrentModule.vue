@@ -168,14 +168,12 @@ export default {
             }
         },
         isSubmitButtonDisabled(){
-            console.log(this.suggestChangeList, this.suggestChangeList.length)
             if (this.suggestChangeList.length === 0){
                 this.submitButtonDisabled = true
             }
             else{
                 this.submitButtonDisabled = false
             }
-            console.log(this.submitButtonDisabled)
         },
         addSuggestion(){
             if (this.suggestChangeList.some(suggestion => suggestion.TagKey === this.filteredParams[this.selectedKey][0]))

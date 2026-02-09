@@ -73,7 +73,6 @@
                             this.$emit('send-address', [this.lat, this.lon, this.maxDistance]);
                         },
                         (error) =>{
-                            console.error("Cant find current location")
                             alert("Could not get your location. Please check your permission")
                         }
                     )
