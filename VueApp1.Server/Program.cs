@@ -18,6 +18,7 @@ string connectionStringKey = builder.Environment.IsProduction() ? "prod_DefaultC
 
 // Validate that connection string is available (from Azure App Service or appsettings)
 var connectionString = builder.Configuration.GetConnectionString(connectionStringKey);
+
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException(
