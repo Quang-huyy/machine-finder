@@ -51,31 +51,47 @@
 </script>
 
 <style scoped>
-  .app-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    flex-direction: column;
-    gap: 10px;
-    min-height: 100vh; 
-    /* Allow the body to handle the scroll */
-    overflow-y: auto;
-    padding-bottom: 40px;
-  }
-  .info-alert {
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Remove fixed height: 80vh; */
+  min-height: 100vh; 
+  gap: 20px;
+  padding: 20px; /* Add padding so it doesn't touch screen edges */
+  box-sizing: border-box;
+}
+
+.info-alert {
   display: flex;
   gap: 15px;
-  background-color: #fff9db; /* Soft yellow */
-  border: 1px solid #ffe066; /* Slightly darker border */
-  border-left: 5px solid #fcc419; /* Strong accent line on the left */
+  background-color: #fff9db;
+  border: 1px solid #ffe066;
+  border-left: 5px solid #fcc419;
   padding: 1.25rem;
   border-radius: 8px;
-  max-width: 800px;
-  margin-bottom: 20px;
+  
+  /* 2. Responsive width */
+  width: 100%; 
+  max-width: 800px; 
+  
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   line-height: 1.5;
-  color: #856404; /* Dark brownish-yellow for readability */
+  color: #856404;
+  box-sizing: border-box;
+}
+
+/* 3. Handle very small screens (Stack the icon) */
+@media (max-width: 480px) {
+  .info-alert {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .app-container {
+    padding: 10px; /* Tighter padding on mobile */
+  }
 }
 
 .alert-icon {
@@ -83,12 +99,15 @@
 }
 
 .alert-content p {
-  margin: 0;
+  margin-bottom: 8px; /* Add some breathing room between paragraphs */
+}
+
+.alert-content p:last-child {
+  margin-bottom: 0;
 }
 
 .alert-footer {
-  margin-top: 8px !important;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Slightly smaller for mobile footer */
   font-style: italic;
   opacity: 0.9;
 }
