@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Supabase;
 using VueApp1.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,20 +15,12 @@ builder.Services.AddOpenApi();
 var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? new[] { "*" };
 var allowSwagger = builder.Configuration.GetValue<bool>("AllowSwagger", true);
 
-// Determine connection string key based on environment
-string connectionStringKey = builder.Environment.IsProduction() ? "prod_DefaultConnection" : "dev_DefaultConnection";
+var supaBaseUrl = builder.Environment.IsDevelopment()? builder.Configuration["SupabaseUrlDev"] : builder.Configuration["SupabaseUrlProd"];
+var supaBaseKey = builder.Environment.IsDevelopment()? builder.Configuration["SupabaseKeyDev"] : builder.Configuration["SupabaseKeyProd"];
 
-// Validate that connection string is available (from Azure App Service or appsettings)
-var connectionString = builder.Configuration.GetConnectionString(connectionStringKey);
-
-if (string.IsNullOrEmpty(connectionString))
-{
-    throw new InvalidOperationException(
-        $"Connection string '{connectionStringKey}' not found. " +
-        $"Environment: {builder.Environment.EnvironmentName}. " +
-        $"In Azure App Service, ensure you have set a connection string named '{connectionStringKey}' under Settings → Configuration → Connection strings."
-    );
-}
+builder.Services.AddScoped<Supabase.Client>(_ =>
+    new Supabase.Client(supaBaseUrl, supaBaseKey, new SupabaseOptions { AutoConnectRealtime = true })
+);
 
 // Add CORS policy with environment-specific origins
 builder.Services.AddCors(options =>

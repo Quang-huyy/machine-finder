@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using Npgsql;
+using System.Data;
 using VueApp1.Server.Models;
 
 public class DapperService
@@ -8,28 +10,22 @@ public class DapperService
 
     public DapperService(IConfiguration configuration, IWebHostEnvironment environment)
     {
-        // Dynamically select connection string based on environment
-        string connectionStringKey = environment.IsProduction() ? "prod_DefaultConnection" : "dev_DefaultConnection";
+        _connectionString = configuration["SupabaseDb"];
+    }
+    public IDbConnection CreateConnection() => new NpgsqlConnection(_connectionString);
         
-        _connectionString = configuration.GetConnectionString(connectionStringKey)
-            ?? throw new InvalidOperationException(
-                $"Connection string '{connectionStringKey}' is not configured. " +
-                $"Environment: {environment.EnvironmentName}"
-            );
-    }
-
     public async Task<IEnumerable<MachineDto>> GetAllAsync()
-    { 
-        using var connection = new SqlConnection(_connectionString);
-        var sql = $"SELECT * FROM Machine";
-        return await connection.QueryAsync<MachineDto>(sql, commandTimeout: 60);
+    {
+        using var connection = CreateConnection();
+        var sql = "SELECT * FROM \"Machine\"";
+        return await connection.QueryAsync<MachineDto>(sql);
     }
 
-    public async Task<MachineParamsDto> GetAllParamsAsyncByID(string machineId)
+    public async Task<MachineParamsDto> GetAllParamsAsyncByID(long machineId)
     {
-        using var connection = new SqlConnection(_connectionString);
-        var sql = $"SELECT TagKey, TagValue FROM MachineParams WHERE MachineID = @MachineID";
-        var results = await connection.QueryAsync<dynamic>(sql, new { MachineID = machineId }, commandTimeout: 60);
+        using var connection = CreateConnection();
+        var sql = $"SELECT * FROM \"MachineParams\" WHERE \"MachineID\" = @MachineID";
+        var results = await connection.QueryAsync<dynamic>(sql, new { MachineID = machineId });
         var dto = new MachineParamsDto();
 
         foreach (var row in results)
@@ -37,7 +33,7 @@ public class DapperService
             string key = row.TagKey;
             string value = row.TagValue;
             
-            switch (key.ToLower()) // Using ToLower() makes it safer against DB typos
+            switch (key.ToLower())
             {
                 case "brand": dto.brand = value; break;
                 case "charge": dto.charge = value; break;

@@ -2,7 +2,7 @@
 {
     public class MachineDto
     {
-        public long id { get; set; }
+        public long MachineID { get; set; }
         public int position { get; set; }
         public float lat{ get; set; }
         public float lon { get; set; }

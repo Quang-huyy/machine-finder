@@ -61,7 +61,7 @@ namespace VueApp1.Server.Controllers
             {
                 machine.position = position;
                 position++;
-                var paramsInfo = await _addressService.GetMachineParam(machine.id.ToString());
+                var paramsInfo = await _addressService.GetMachineParam(machine.MachineID);
                 machine.params_info = paramsInfo;
             }
             return Ok(nearbyMachine);

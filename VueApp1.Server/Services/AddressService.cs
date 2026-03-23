@@ -89,7 +89,7 @@ namespace VueApp1.Server.Services
             }
             return machineList.ToList();
         }
-        public async Task<MachineParamsDto> GetMachineParam(string machineId)
+        public async Task<MachineParamsDto> GetMachineParam(long machineId)
         {
             return await _dapperService.GetAllParamsAsyncByID(machineId);
         }
