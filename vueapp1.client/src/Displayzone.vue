@@ -37,7 +37,6 @@
         methods:{
             updateItemList(data){
                 this.itemList = data;
-                // console.log('Received data:', data);
             }
         }
     };

@@ -53,10 +53,10 @@ public class DapperService
 
     public async Task<bool> SaveSuggestions(MachineSuggestionDto[] suggestions)
     {
-        using var connection = new SqlConnection(_connectionString);
+        using var connection = CreateConnection();
         var rowToUpdate = suggestions.Length;
-        var sql = @"INSERT INTO SuggestionParams (MachineID, TagKey, TagValue, SuggestTagValue) VALUES (@MachineID, @TagKey, @TagValue, @SuggestTagValue)";
-        var result = await connection.ExecuteAsync(sql, suggestions, commandTimeout: 60);
+        var sql = $"INSERT INTO \"SuggestionParams\" (\"MachineID\", \"TagKey\", \"TagValue\", \"SuggestTagValue\") VALUES (@MachineID, @TagKey, @TagValue, @SuggestTagValue)";
+        var result = await connection.ExecuteAsync(sql, suggestions);
 
         return result < rowToUpdate ? false : true;
     }

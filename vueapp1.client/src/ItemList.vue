@@ -3,7 +3,7 @@
     <ul class="item-list" v-if="itemsListNotEmpty">
       <li v-for="item in items" :key="item.id">
         <Item 
-          :id="item.id"
+          :id="item.machineID"
           :position="item.position"
           :distance="item.distance" 
           :address="item.full_address"
