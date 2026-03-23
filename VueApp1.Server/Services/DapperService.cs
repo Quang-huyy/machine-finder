@@ -10,7 +10,7 @@ public class DapperService
 
     public DapperService(IConfiguration configuration, IWebHostEnvironment environment)
     {
-        _connectionString = configuration["SupabaseDb"];
+        _connectionString = environment.IsDevelopment()?  configuration["SupabaseDbDev"]: configuration.GetConnectionString("SupabaseDbProd");
     }
     public IDbConnection CreateConnection() => new NpgsqlConnection(_connectionString);
         
