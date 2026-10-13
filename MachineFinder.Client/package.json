@@ -1,5 +1,5 @@
 {
-  "name": "vueapp1.client",
+  "name": "MachineFinder.Client",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,9 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "prod": "npm run build && npm run preview",
     "build": "vite build",
-    "preview": "vite preview",
     "lint": "eslint . --fix --cache"
   },
   "dependencies": {
