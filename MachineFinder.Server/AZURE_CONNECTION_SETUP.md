@@ -55,10 +55,10 @@ Also set Environment Variable:
 
 For local development, update **appsettings.Development.json**:
 
-```json
+  ```json
 {
   "ConnectionStrings": {
-    "dev_DefaultConnection": "Server=(local);Database=VueApp1Db;Trusted_Connection=true;"
+    "dev_DefaultConnection": "Server=(local);Database=MachineFinderDb;Trusted_Connection=true;"
   }
 }
 ```
