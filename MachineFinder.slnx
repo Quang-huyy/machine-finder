@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="MachineFinder.Client/MachineFinder.Client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="MachineFinder.Server/MachineFinder.Server.csproj" />
+  <Project Path="MachineFinder.Test/MachineFinder.Test.csproj" />
+</Solution>
