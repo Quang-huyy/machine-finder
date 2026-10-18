@@ -18,15 +18,18 @@
       <SearchZone @send-address="saveCurrentAddress" />
       <Displayzone :lat="lat" :lon="lon" :maxDistance="maxDistance"/>
   </div>
+  <Analytics />
 </template>
 
 <script>
+  import { Analytics } from '@vercel/analytics/vue';
   import Navbar from '@/components/Navbar.vue';
   import SearchZone from '@/SearchZone.vue';
   import Displayzone from "@/Displayzone.vue";
   export default {
     name: 'App',
     components: {
+      Analytics,
       Navbar,
       SearchZone,
       Displayzone
